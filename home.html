@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Drag</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <style>
+        .container {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .container .dragBox {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            margin: 2%;
+        }
+    </style>
+</head>
+<body onload="move('dragBox')">
+    <div class="container">
+        <div class="dragBox" style="background-color: red;">1</div>
+        <div class="dragBox" style="background-color: blue;">2</div>
+        <div class="dragBox" style="background-color: green;">3</div>
+        <div class="dragBox" style="background-color: yellow;">4</div>
+        <div class="dragBox" style="background-color: orangered;">5</div>
+        <div class="dragBox" style="background-color: rgb(132, 0, 255);">6</div>
+    </div>
+    <script>
+        var chooseElement;
+
+        const move = (dragBox)=>{
+            const elements = document.querySelectorAll(".dragBox");
+            elements.forEach(element=>{
+                element.addEventListener("mousedown",()=>{
+                    element.style.position = "absolute";
+                    chooseElement=element
+                    document.onmousemove=(e)=>{
+                        var x=e.pageX;
+                        var y=e.pageY;
+                        chooseElement.style.left = x-100 + 'px';
+                        chooseElement.style.top=y-100 + 'px';
+                    } 
+                })
+            })
+            document.onmouseup = function(e){
+                chooseElement=null;
+            }
+        }
+    </script>
+</body>
+</html>
